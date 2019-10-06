@@ -4,7 +4,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 //Login page
-router.get('/login',(req,res)=>res.render('Login'));
+router.get('/login',(req,res)=>res.render('login'));
 
 //Register
 router.get('/register',(req,res)=>res.render('register'));
@@ -69,6 +69,7 @@ router.post('/register',(req,res) =>{
                         //save user
                         newUser.save()
                             .then( user => {
+                                req.flash('success_msg','Thanks for registering!You can login now');
                                 res.redirect('/users/login');
                             })
                             .catch(err => {
