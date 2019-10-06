@@ -9,26 +9,21 @@ router.get('/register',(req,res)=>res.render('register'));
 
 //Registration Handling
 router.post('/register',(req,res) =>{
-    const {name , email , password1 ,password2} =req.body;
-    // const name = req.body.name
-    // const email = req.body.email
-    // const password1 = req.body.password1
-    // const password2 = req.body.password2 
+    const { name, email, password, password2 } = req.body;
     let errors = [];
-    console.log(req.body);
-    
+    console.log(password,typeof password,name,typeof name);
     //Check required fields
-    if(!name || !email ||!password1 || !password2){
+    if(!name || !email ||!password  || !password2){
         errors.push({msg:'Please fill required fields'});
     }
     
     //check if passwords equal
-    if(password1 !== password2){
+    if(password !== password2){
         errors.push({msg:'Passwords do not match'});
     }
 
     //check password length
-    if(password1.length<6){
+    if(password.length<6){
         errors.push({msg:'Password should be atleast 6 characters'});
     }
 
@@ -37,7 +32,7 @@ router.post('/register',(req,res) =>{
             errors,
             name,
             email,
-            password1,
+            password,
             password2
         });
     }else{
